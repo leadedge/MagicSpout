@@ -1,6 +1,6 @@
 ﻿## MagicSpoutSender
 
-MagicSpoutSender is a module for [Magic](https://magicmusicvisuals.com/) to send textures to receivers using the Spout protocol. It supplements the main Magic Spout output so that individual outputs can be included in a project.
+MagicSpoutSender is a module for [Magic Music Visuals](https://magicmusicvisuals.com/) to send textures to receivers using the Spout protocol. It supplements the main Magic Spout output so that individual outputs can be included in a project.
 
 ## Updates
 14.06.21 - Create repository
