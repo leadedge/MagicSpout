@@ -27,7 +27,7 @@ This program is free software: you can redistribute it and/or modify it under th
 
 ----------------------
 
-[Magic Music Visuals](https://magicmusicvisuals.com/)
+[Magic Music Visuals](https://magicmusicvisuals.com/) Copyright (c) 2021 Color & Music, LLC.
 
 /*
  * Magic Module Development Kit (MDK) v2.3
