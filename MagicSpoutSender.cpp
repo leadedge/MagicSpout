@@ -10,7 +10,7 @@
 //		 Copyright(c) 2012 - 2020 Color & Music, LLC.All rights reserved.
 //
 //		 Spout SDK
-//		 Copyright(C) 2018 - 2021 Lynn Jarvis https://spout.zeal.co/
+//		 Copyright(C) 2018 - 2023 Lynn Jarvis https://spout.zeal.co/
 //
 // =======================================================================================
 //	This program is free software : you can redistribute it and/or modify
@@ -35,16 +35,24 @@
 //				  Version 2.000 for testing
 //	13.06.21	- Scene change working
 //	14.06.21	- Version 2.001 GitHub release
+//	15.12.23	- Suppress compiler warnings because OpenGL functions can't be changed
+//	26.12.23	- Rebuild with current SpoutGL
+//				  VS2022 Version 2.002
 //
 // =======================================================================================
+
+// Suppress these warnings because OpenGL functions can't be changed
+#pragma warning(disable : 26482) // Only index into arrays using constant expressions
+#pragma warning(disable : 26485) // Do not pass an array as a single pointer
+#pragma warning(disable : 26451) // Arithmetic overflow
 
 // Necessary for OpenGL
 #include <windows.h>
 #include <gl/gl.h>
 #pragma comment(lib, "OpenGL32.Lib")
 
-#include "MagicModule.h"
 #include "..\SpoutGL\SpoutSender.h"
+#include "MagicModule.h"
 
 // Convenience definitions
 #define PARAM_SenderName 0
@@ -74,7 +82,7 @@ public:
 		return &settings;
 	}
 
-	const MagicModuleParam *getParams() { 
+	const MagicModuleParam *getParams() {
 		return params; 
 	}
 
@@ -85,24 +93,31 @@ public:
 			// Send a texture from the host fbo.
 			// If there is no sender name, wait for user entry.
 			if (SenderName[0])
-				sender.SendFbo(userData->glState->currentFramebuffer, (unsigned int)userData->glState->viewportWidth, (unsigned int)userData->glState->viewportHeight);
+				sender.SendFbo(userData->glState->currentFramebuffer,
+					static_cast<unsigned int>(userData->glState->viewportWidth),
+					static_cast<unsigned int>(userData->glState->viewportHeight));
 		}
 	}
 
-	bool fixedParamValueChanged(const int whichParam, const char* newValue) {
+	bool fixedParamValueChanged(const int whichParam, const char* newValue)  override {
 
-		if (!newValue || !newValue[0])
+		if (!newValue)
 			return false;
 
+		if (newValue[0] == 0)
+			return false;
+	
 		switch (whichParam) {
 			// Sender name entry
-			// The sender is re-created by SendFbo
+			// For a different name, the sender is re-created by SendFbo
 			case PARAM_SenderName:
 				if (strcmp(newValue, SenderName) != 0) {
 					sender.ReleaseSender(); // for repeats
 					strcpy_s(SenderName, 256, newValue);
 					sender.SetSenderName(SenderName); // for SendFbo
 				}
+				break;
+			default:
 				break;
 		}
 
@@ -111,8 +126,8 @@ public:
 	}
 
 	const char *getHelpText() {
-		return "Magic Spout Sender - Vers 2.001\n"
-			"Lynn Jarvis 2019-2021\n\n"
+		return "Magic Spout Sender - Vers 2.002\n"
+			"Lynn Jarvis 2019-2023\n\n"
 			"Sends textures to Spout receivers\n"
 			"Spout - https://spout.zeal.co/ \n\n"
 			"Sender : sender name\n";
@@ -121,7 +136,7 @@ public:
 protected:
 
 	SpoutSender sender;
-	char SenderName[256];
+	char SenderName[256]{};
 
 };
 
