@@ -10,7 +10,7 @@
 //		 Copyright(c) 2012 - 2020 Color & Music, LLC.All rights reserved.
 //
 //		 Spout SDK
-//		 Copyright(C) 2018 - 2023 Lynn Jarvis https://spout.zeal.co/
+//		 Copyright(C) 2018 - 2024 Lynn Jarvis https://spout.zeal.co/
 //
 // =======================================================================================
 //	This program is free software : you can redistribute it and/or modify
@@ -35,9 +35,11 @@
 //				  Version 2.000 for testing
 //	13.06.21	- Scene change working
 //	14.06.21	- Version 2.001 GitHub release
-//	15.12.23	- Suppress compiler warnings because OpenGL functions can't be changed
-//	26.12.23	- Rebuild with current SpoutGL
+//	15.12.22	- Suppress compiler warnings because OpenGL functions can't be changed
+//	26.12.22	- Rebuild with current SpoutGL
 //				  VS2022 Version 2.002
+//	03.12.23	- Rebuild with SpoutGL Version 2.007.013
+//				  VS2022 /MT Version 2.003
 //
 // =======================================================================================
 
@@ -126,8 +128,8 @@ public:
 	}
 
 	const char *getHelpText() {
-		return "Magic Spout Sender - Vers 2.002\n"
-			"Lynn Jarvis 2019-2023\n\n"
+		return "Magic Spout Sender - Vers 2.003\n"
+			"Lynn Jarvis 2019-2024\n\n"
 			"Sends textures to Spout receivers\n"
 			"Spout - https://spout.zeal.co/ \n\n"
 			"Sender : sender name\n";
