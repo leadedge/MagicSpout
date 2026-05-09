@@ -5,10 +5,12 @@ MagicSpoutSender is a module for Magic Music Visuals to send textures to receive
 ## Updates
 14.06.21 - Create repository
 26.12.22 - Rebuild Version 2.003 with SpoutGL Version 2.007.013 VS2022 /MT
-
+09.05.26 - Add glClose() to release the sender if the module is closed
+		   Rebuild Version 2.004 with SpoutGL Version 2.007.017 VS2022 /MT
+ 
 ## Setup
 
-1. MagicSpoutSender project files are for Visual studio 2017 for Windows.
+1. MagicSpoutSender project files are for Visual studio 2022 for Windows.
 Before opening the solution or project, the following files must be added.
 2. The Magic Music Visuals Module Development Kit (MDK)
     - [Visit the MDK download page](https://magicmusicvisuals.com/developers) and download "Magic MDK v2.3" and save to a convenient folder.
@@ -17,12 +19,11 @@ Before opening the solution or project, the following files must be added.
     - [Visit the Spout repository](https://github.com/leadedge/Spout2)
     - Click "Clone or Download", "Download ZIP" and save to a convenient folder.
     - Unzip the contents and copy all the .cpp and .h files from the repository "../SPOUTSDK/SpoutGL/" folder to the project "SpoutGL" folder.
-4. Open the project solution file with Visual Studio 2017, change to release and build.
-5. The project may also be opened with Visual Studio 2019 and allow upgrade.
+4. Open the project solution file with Visual Studio 2022, change to release and build.
 
 ## Copyrights
 
-MagicSpoutSender - Copyright(C) 2018-2024 Lynn Jarvis [https://spout.zeal.co/]
+MagicSpoutSender - Copyright(C) 2018-2026 Lynn Jarvis [https://spout.zeal.co/]
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser  General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.  You should have received a copy of the GNU Lesser General Public License along with this program. If not, see [http://www.gnu.org/licenses/](http://www.gnu.org/licenses).
 

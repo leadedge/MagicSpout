@@ -10,7 +10,7 @@
 //		 Copyright(c) 2012 - 2020 Color & Music, LLC.All rights reserved.
 //
 //		 Spout SDK
-//		 Copyright(C) 2018 - 2024 Lynn Jarvis https://spout.zeal.co/
+//		 Copyright(C) 2018 - 2026 Lynn Jarvis https://spout.zeal.co/
 //
 // =======================================================================================
 //	This program is free software : you can redistribute it and/or modify
@@ -38,8 +38,11 @@
 //	15.12.22	- Suppress compiler warnings because OpenGL functions can't be changed
 //	26.12.22	- Rebuild with current SpoutGL
 //				  VS2022 Version 2.002
-//	03.12.23	- Rebuild with SpoutGL Version 2.007.013
+//	08.12.23	- Rebuild with SpoutGL Version 2.007.013
 //				  VS2022 /MT Version 2.003
+//	09.05.26	- Add glClose() to release the sender if the module is closed
+//				  Rebuild with SpoutGL Version 2.007.017
+//				  VS2022 /MT Version 2.004
 //
 // =======================================================================================
 
@@ -53,7 +56,7 @@
 #include <gl/gl.h>
 #pragma comment(lib, "OpenGL32.Lib")
 
-#include "..\SpoutGL\SpoutSender.h"
+#include "..\..\SpoutGL\SpoutSender.h"
 #include "MagicModule.h"
 
 // Convenience definitions
@@ -75,6 +78,7 @@ public:
 	}
 
 	~MagicSpoutSenderModule() {
+		// See also glClose
 		sender.ReleaseSender();
 	}
 
@@ -88,16 +92,21 @@ public:
 		return params; 
 	}
 
-	// glInit, glClose, drawBefore not used
+	// Close the sender if the module is closed
+	void glClose() {
+		sender.ReleaseSender();
+	}
 
+	// glInit, drawBefore not used
 	void drawAfter(MagicUserData *userData) {
 		if (userData->glState->currentFramebuffer > 0) {
 			// Send a texture from the host fbo.
 			// If there is no sender name, wait for user entry.
-			if (SenderName[0])
+			if (SenderName[0]) {
 				sender.SendFbo(userData->glState->currentFramebuffer,
 					static_cast<unsigned int>(userData->glState->viewportWidth),
 					static_cast<unsigned int>(userData->glState->viewportHeight));
+			}
 		}
 	}
 
@@ -128,8 +137,8 @@ public:
 	}
 
 	const char *getHelpText() {
-		return "Magic Spout Sender - Vers 2.003\n"
-			"Lynn Jarvis 2019-2024\n\n"
+		return "Magic Spout Sender - Vers 2.004\n"
+			"Lynn Jarvis 2019-2026\n\n"
 			"Sends textures to Spout receivers\n"
 			"Spout - https://spout.zeal.co/ \n\n"
 			"Sender : sender name\n";
