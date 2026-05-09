@@ -5,8 +5,8 @@ MagicSpoutSender is a module for Magic Music Visuals to send textures to receive
 ## Updates
 14.06.21 - Create repository
 26.12.22 - Rebuild Version 2.003 with SpoutGL Version 2.007.013 VS2022 /MT
-09.05.26 - Add glClose() to release the sender if the module is closed
-		   Rebuild Version 2.004 with SpoutGL Version 2.007.017 VS2022 /MT
+09.05.26 - Add glClose() to release the sender if the module is closed and
+		   rebuild Version 2.004 with SpoutGL Version 2.007.017 VS2022 /MT
  
 ## Setup
 
